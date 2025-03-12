@@ -2,8 +2,8 @@
 
 This tool is an instant messaging client based on the MQTT protocol.
 
-It is developed as an HTML single-page app and uses the [Eclipse Paho](https://github.com/eclipse/paho.mqtt.javascript) JavaScript library.
+It is developed as a single-page HTML application and utilizes the [Eclipse Paho](https://github.com/eclipse/paho.mqtt.javascript) JavaScript library.
 
-The folder "vanilla" contains the legacy version while "vue" folder contains the update Vue version.
+The "vanilla" folder contains the legacy version, while the "vue" folder includes the updated Vue version.
 
-It can be used [here](https://zyzalfors.github.io/MQTTMessenger/index.html).
+You can access it [here](https://zyzalfors.github.io/MQTTMessenger/index.html).

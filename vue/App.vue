@@ -68,13 +68,15 @@ function connect(conf) {
   messages.value += `\n${now} | Connecting to ${url.value} on port ${port.value} ...`;
   messages.value = messages.value.trimStart();
   try {
-    if(client.value) client.value.disconnect();
+    if(client.value && client.value.isConnected()) client.value.disconnect();
     client.value = new Paho.Client(url.value, port.value, '');
     client.value.onConnectionLost = onConnectionLost;
     client.value.onMessageArrived = onMessageArrived;
     client.value.connect({onSuccess: onSuccess, onFailure: onFailure, useSSL: conf.useSSL, reconnect: conf.reconnect});
   }
   catch(err) {
+    if(client.value && client.value.isConnected()) client.value.disconnect();
+    client.value = '';
     messages.value += `\n${now} | ${err.message}`;
   }
 }

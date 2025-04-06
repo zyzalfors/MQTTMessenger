@@ -1,72 +1,108 @@
 <script setup>
-    import {ref} from "vue";
+import { ref } from 'vue';
 
-    const props = defineProps(["messages"]);
-    const message = ref("");
-    const emit = defineEmits(["send"]);
-    const emitMess = () => {
-        emit("send", {m: message.value});
-        message.value = "";
-    }
+const css = ref({fontFamily: 'helvetica, sans serif', margin: '0px', padding: '5px', borderRadius: '5px', lightColor: 'lightgrey', darkColor: '#333333', boxSizing: 'border-box'});
+const message = ref('');
+const props = defineProps(['messages']);
+const emit = defineEmits(['send']);
+
+const emitMess = () => {
+  emit('send', {m: message.value});
+  message.value = '';
+};
 </script>
 
 <template>
-    <div>
-        <textarea rows="40" cols="50" readonly>{{messages}}</textarea>
-        <br>
-        <input type="text" placeholder="Enter your message ..." v-model="message">
-        <br>
-        <input type="button" value="Send" @click="emitMess">
+  <div class="messages">
+    <div class="textarea">
+      <textarea readonly>{{ messages }}</textarea>
     </div>
+    <div class="input">
+      <div class="message">
+        <input type="text" placeholder="Type a message" v-model="message"/>
+      </div>
+      <div class="send">
+        <input type="button" value=">" @click="emitMess"/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-    div {
-        position: fixed;
-        top: 0;
-        left: 240px;
-        width: 100%;
-        height: 100vh;
-        padding: 20px;
-    }
+* {
+  font-family: v-bind(css.fontFamily);
+  box-sizing: v-bind(css.boxSizing);
+}
 
-    input[type=text] {
-        padding: 2px 10px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        width: 50%;
-    }
+.messages {
+  height: 600px;
+  width: 1000px;
+}
 
-    input[type=button] {
-        background-color: #3c3c3c;
-        border: none;
-        color: white;
-        padding: 5px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
+.textarea {
+  height: 95%;
+  width: 100%;
+}
 
-    input[type=button]:active {
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-    }
+textarea {
+  height: 100%;
+  width: 100%;
+  border: 1px solid v-bind(css.lightColor);
+  border-radius: v-bind(css.borderRadius);
+  margin: v-bind(css.margin);
+  padding: v-bind(css.padding);
+  background-color: v-bind(css.darkColor);
+  color: v-bind(css.lightColor);
+  box-sizing: v-bind(css.boxSizing);
+  resize: none;
+}
 
-    textarea {
-        width: 50%;
-        outline: none;
-        resize: none;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+.input {
+  display: flex;
+  height: 5%;
+  width: 100%;
+}
 
-    label {
-        float: left;
-        width: 110px;
-        text-align: left;
-    }
+.message {
+  height: 100%;
+  width: 90%;
+}
+
+.send {
+  height: 100%;
+  width: 10%;
+}
+
+input[type='text'] {
+  width: 100%;
+  border: 1px solid v-bind(css.lightColor);
+  border-radius: v-bind(css.borderRadius);
+  margin: v-bind(css.margin);
+  padding: v-bind(css.padding);
+  background-color: v-bind(css.darkColor);
+  color: v-bind(css.lightColor);
+}
+
+input[type='button'] {
+  width: 100%;
+  border: 1px solid v-bind(css.lightColor);
+  border-radius: v-bind(css.borderRadius);
+  margin: v-bind(css.margin);
+  padding: v-bind(css.padding);
+  background-color: v-bind(css.darkColor);
+  color: v-bind(css.lightColor);
+}
+
+input[type='button']:active {
+  transform: translateY(2px);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+::placeholder {
+  padding: v-bind(css.padding);
+  color: darkgrey;
+}
 </style>

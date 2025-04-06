@@ -37,12 +37,14 @@ function onSuccess() {
 }
 
 function onFailure(err) {
+  client.value = '';
   messages.value += `\n${new Date().toISOString()} | Failure: ${err.errorMessage}`;
   messages.value = messages.value.trimStart();
 }
 
 function onConnectionLost(err) {
   if(err.errorCode === 0) return;
+  client.value = '';
   messages.value += `\n${new Date().toISOString()} | Connection lost: ${err.errorMessage}`;
   messages.value = messages.value.trimStart();
 }

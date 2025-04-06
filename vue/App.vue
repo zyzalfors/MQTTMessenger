@@ -60,6 +60,7 @@ function onMessageArrived(mess) {
 }
 
 function connect(conf) {
+  showConfig.value = false;
   const now = new Date().toISOString();
   username.value = conf.username;
   url.value = conf.url.trim();
